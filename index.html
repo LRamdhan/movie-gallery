@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Gallery</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/responsive.css">
+  </head>
+  <body>
+    <!-- container-start -->
+    <main class="container">
+      <div class="content">
+          <form class="search">
+              <input type="text" class="keyword" placeholder="Cari Film...">
+              <button type="submit" class="tbl-cari">cari</button>
+          </form>
+          <h1 class="pesan">belum ada film</h1>
+          <img class="loading" src="img/load.gif">
+          <div class="galeri"></div>
+      </div>
+    </main>    
+      <!-- container-end -->
+
+    <!-- po up detail start -->
+    <div class="pop-up">
+        <div class="detail-film">
+            <table border="0" class="detail-identitas" cellspacing="0">
+                <tr>
+                    <td class="field">Judul</td>
+                    <td>:</td>
+                    <td class="isi"></td>
+                </tr>
+                <tr>
+                    <td class="field">Tahun</td>
+                    <td>:</td>
+                    <td class="isi"></td>
+                </tr>
+                <tr>
+                    <td class="field">Direktur</td>
+                    <td>:</td>
+                    <td class="isi"></td>
+                </tr>
+                <tr>
+                    <td class="field">Gendre</td>
+                    <td>:</td>
+                    <td class="isi"></td>
+                </tr>
+                <tr>
+                    <td class="field">Runtime</td>
+                    <td>:</td>
+                    <td class="isi"></td>
+                </tr>
+                <tr>
+                    <td class="field">Plot</td>
+                    <td>:</td>
+                    <td class="isi"></td>
+                </tr>
+            </table>
+            <div class="exit" id="exit">
+              <div class="layer-exit"></div>
+              <div class="cross">
+                <div class="layer-cross satu">
+                  <div class="line"></div>
+                </div>
+                <div class="layer-cross dua">
+                  <div class="line"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- po up detail start -->
+
+    <script type="module" src="/src/ts/main.ts"></script>
+  </body>
+</html>
