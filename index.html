@@ -8,70 +8,87 @@
     <link rel="stylesheet" href="src/css/responsive.css">
   </head>
   <body>
-    <!-- container-start -->
     <main class="container">
-      <div class="content">
-          <form class="search">
-              <input type="text" class="keyword" placeholder="Cari Film...">
-              <button type="submit" class="tbl-cari">cari</button>
-          </form>
-          <h1 class="pesan">belum ada film</h1>
-          <img class="loading" src="img/load.gif">
-          <div class="galeri"></div>
-      </div>
-    </main>    
-      <!-- container-end -->
 
-    <!-- po up detail start -->
-    <div class="pop-up">
-        <div class="detail-film">
-            <table border="0" class="detail-identitas" cellspacing="0">
-                <tr>
-                    <td class="field">Judul</td>
-                    <td>:</td>
-                    <td class="isi"></td>
-                </tr>
-                <tr>
-                    <td class="field">Tahun</td>
-                    <td>:</td>
-                    <td class="isi"></td>
-                </tr>
-                <tr>
-                    <td class="field">Direktur</td>
-                    <td>:</td>
-                    <td class="isi"></td>
-                </tr>
-                <tr>
-                    <td class="field">Gendre</td>
-                    <td>:</td>
-                    <td class="isi"></td>
-                </tr>
-                <tr>
-                    <td class="field">Runtime</td>
-                    <td>:</td>
-                    <td class="isi"></td>
-                </tr>
-                <tr>
-                    <td class="field">Plot</td>
-                    <td>:</td>
-                    <td class="isi"></td>
-                </tr>
-            </table>
-            <div class="exit" id="exit">
-              <div class="layer-exit"></div>
-              <div class="cross">
-                <div class="layer-cross satu">
-                  <div class="line"></div>
-                </div>
-                <div class="layer-cross dua">
-                  <div class="line"></div>
-                </div>
+      <!-- head-start -->
+      <div class="w-100 d-flex align-items-center justify-content-center column-gap-2 mt-5">
+        <img src="/img/movie-icon.svg" alt="icon" class="w-35">
+        <h4>Movie Gallery</h4>
+      </div>
+      <!-- head-end -->
+
+      <!-- field-start -->
+      <div class="row mt-4">
+        <div class="col"></div>
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+          <form class="search d-flex column-gap-2">
+            <input type="text" class="form-control keyword" id="keyword" aria-describedby="emailHelp" placeholder="Cari Film...">
+            <button type="submit" class="btn btn-primary tbl-cari">Cari</button>
+          </form>
+        </div>
+        <div class="col"></div>
+      </div>
+      <!-- field-end -->
+
+      <hr class="mt-4 d-none d-md-block" />
+
+      <!-- movie-result-start -->
+      <div class="content mt-5">
+        <h1 class="pesan" align="center"></h1>
+        <img class="loading" src="img/load.gif">
+        <div class="galeri"></div>
+      </div>
+      <!-- movie-result-start -->
+
+      <!-- Modal-start-->
+      <div class="modal fade" id="mymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Film</h1>
+              <button id="exit" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="detail-film">
+                <table border="0" class="detail-identitas" cellspacing="0">
+                    <tr>
+                        <td class="field">Judul</td>
+                        <td>:</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="field">Tahun</td>
+                        <td>:</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="field">Direktur</td>
+                        <td>:</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="field">Gendre</td>
+                        <td>:</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="field">Runtime</td>
+                        <td>:</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="field">Plot</td>
+                        <td>:</td>
+                        <td class="isi"></td>
+                    </tr>
+                </table>
               </div>
             </div>
+          </div>
         </div>
-    </div>
-    <!-- po up detail start -->
-
+      </div>
+      <!-- Modal-end-->
+    </main>
     <script type="module" src="/src/ts/main.ts"></script>
   </body>
 </html>

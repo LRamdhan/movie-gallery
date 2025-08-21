@@ -15,23 +15,17 @@ let request = (url: string, keyword: string, callback: (obj: XMLHttpRequest) => 
 };
 
 // membuat film
-let elFilm = (poster: string, title: string, year: string, imdb: string): string => {
-  return `<div class="film">
-              <div>
-                  <div class="card">
-                      <div>
-                          <img class="img" src="${poster}" alt="">
-                      </div>
-                      <div class="identitas">
-                          <h1 class="judul">${title}</h1>
-                          <p class="tahun">${year}</p>
-                          <div class="tbl-detail">
-                              <span class="detail" data-imdb="${imdb}">detail film</span> 
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>`;
+let elFilm = (poster: string, title: string, year: string, imdb: string): string => {    
+  return `
+    <div class="card">
+        <img src="${poster}" class="card-img-top" alt="${title}">
+        <div class="card-body">
+            <h5 class="card-title">${title}</h5>
+            <p class="card-text">${year}</p>
+            <button type="button" class="btn btn-primary tbl-detail detail" data-imdb="${imdb}">Detail</button>
+        </div>
+    </div>
+`;
 };
 
 // memasukan detail ke pop up
@@ -61,6 +55,5 @@ let requestFetch = (url: string): Promise<any> => {
           }
       });
 };
-
 
 export {request, elFilm, detailMasuk, detailKeluar, requestFetch};

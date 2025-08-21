@@ -1,3 +1,9 @@
+// Import our custom CSS
+import './../scss/style.scss'
+
+// Import all of Bootstrap’s JS
+import * as bootstrap from 'bootstrap'
+
 import { API_KEY, MOVIE_URL } from './env';
 import { elFilm, detailMasuk, detailKeluar, requestFetch } from './functions';
 
@@ -15,18 +21,17 @@ const keyword: HTMLInputElement = document.querySelector('.keyword') as HTMLInpu
 const pesan: HTMLElement = document.querySelector('.pesan') as HTMLElement;
 const search: HTMLElement = document.querySelector('.search') as HTMLElement;
 const loadImg: HTMLElement = document.querySelector('.loading') as HTMLElement;
-const popUp: HTMLElement = document.querySelector('.pop-up') as HTMLElement;
 const exit: HTMLElement = document.getElementById('exit') as HTMLElement;
 const isi: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName('isi') as HTMLCollectionOf<HTMLElement>;
-
+const modal: HTMLElement = document.getElementById('mymodal') as HTMLElement;
+const myModal = new bootstrap.Modal(modal, {})
 
 // menampilkan pop up
 let clickEvent = () => {
     const detail: HTMLElement[]  = Array.from(document.getElementsByClassName('detail')) as HTMLElement[];
     detail.forEach((btn: HTMLElement) => {
-        btn.addEventListener('click', async (event: MouseEvent) => {
-            popUp.classList.toggle('pop-up-muncul');
-            setTimeout(() => popUp.classList.toggle('opacity-muncul'), 100);
+        btn.addEventListener('click', async () => {
+            myModal.show()
             let rps = await requestFetch(`${MOVIE_URL}/?apikey=${API_KEY}&i=${btn.dataset["imdb"]}`);
             detailMasuk(isi, rps.Title, rps.Year, rps.Director, rps.Genre, rps.Runtime, rps.Plot);
         });
@@ -34,12 +39,12 @@ let clickEvent = () => {
 };
 
 // menutup pop up
-exit.addEventListener('click', (event: MouseEvent) => {
-    popUp.classList.toggle('opacity-muncul');
-    setTimeout(() => {
-        popUp.classList.toggle('pop-up-muncul')
-        detailKeluar(isi);
-    }, 520);
+exit.addEventListener('click', () => {
+    myModal.hide()
+    const td: HTMLElement[] = Array.from(isi);
+    td.forEach((e: HTMLElement) => {
+        e.textContent = '';
+    });
 });
 
 // melakukan pencarian film
@@ -48,7 +53,7 @@ search.addEventListener('submit', async (event: SubmitEvent) => {
     pesan.innerHTML = '';
     galeri.innerHTML = '';
     loadImg.style.display = 'block';
-    try {      
+    try { 
         let rps = await requestFetch(`${MOVIE_URL}/?apikey=${API_KEY}&s=${keyword.value}`);
         if(rps.Search) {
             let gambar: string = '';
@@ -59,9 +64,24 @@ search.addEventListener('submit', async (event: SubmitEvent) => {
             galeri.innerHTML = gambar;
             setTimeout(() => clickEvent(), 200);
         } else {
+            let message: string = '';
+            switch(rps.Error) {
+                case 'Incorrect IMDb ID.' : 
+                    message = 'Keyword tidak boleh kosong';
+                    break;
+                case 'Too many results.' :
+                    message = 'Gunakan keyword yang lebih detail';
+                    break;
+                case 'Movie not found!' :
+                    message = 'Film tidak ditemukan';
+                    break;
+                default : 
+                    message = 'Terjadi kesalahan, coba lagi nanti';
+            }                 
             loadImg.style.display = 'none';
             galeri.innerHTML = '';
-            pesan.innerHTML = 'film tidak ditemukan';
+            pesan.style.display = 'block';
+            pesan.innerHTML = message;
         }            
     } catch(err) {
         console.log('telah terjdi error : ' + err);
